@@ -55,9 +55,8 @@ public class HW4_SlotMachineSimulation{
    public static void main(String [] args) throws IOException{ 
 	   
 	   int fruitGuess;
-	   int bet;
 	   double amountAvailable;
-	   char repeatGame='y';
+	   String repeatGame="";
 	   String availableMoneyAmount;
 	   double bet_Amount;
 	   final int MINIMAL_AMOUNT=10;
@@ -87,7 +86,7 @@ public class HW4_SlotMachineSimulation{
 	   
 	  
 	   //start of the first while that checks to see if user wants to play
-	   while(repeatGame!='n'&&repeatGame!='N') {
+	   do {
 		   //welcome into the game
 		   System.out.println("Welcome to Megan's and Mercede's Slot Machine");
 		   outFile.println("Welcome to Megan's and Mercede's Slot Machine");
@@ -107,7 +106,7 @@ public class HW4_SlotMachineSimulation{
 		   outFile.println("Please enter how much do you want to bet this time:");
 		   bet_Amount=keyboard.nextDouble();
 		   //nested if to check if user input is in the correct range
-
+		   while(bet_Amount<1||bet_Amount*10>amountAvailable) {
 			   if(bet_Amount<1) {
 				   System.out.println("The bet is less than 10.");
 				   outFile.println("The bet is less than 10.");
@@ -116,8 +115,14 @@ public class HW4_SlotMachineSimulation{
 				   System.out.println("The bet is greater than your current amount of money");
 				   outFile.println("The bet is greater than your current amount of money");   
 			   }
+			   bet_Amount=keyboard.nextDouble();
 		   
-		   
+		   }
+		   bet_Amount*=MINIMAL_AMOUNT;
+		   // the amount the user is betting
+		   System.out.printf("Your current bet: $%.2f\n", bet_Amount);
+		   outFile.printf("Your current bet: $%.2f\n", bet_Amount);
+		   System.out.println("Please select one of the fruit by entering a number between 1 and 6:");
 		  
 		   //show the list of options to pick
 		   System.out.println("Please type the number corresponding with the word you choose:/n/t 1. Cherry/n/t 2. Orange" + 
@@ -128,14 +133,26 @@ public class HW4_SlotMachineSimulation{
 		   System.out.println("Please enter your selection");
 		   outFile.println("Please enter your selection");
 		   fruitGuess=keyboard.nextInt();
-		   while() {
+		   while(fruitGuess<SMALLEST_IMAGE_OPTION || fruitGuess>BIGGEST_IMAGE_OPTION) {
+			   if(fruitGuess<SMALLEST_IMAGE_OPTION || fruitGuess>BIGGEST_IMAGE_OPTION) {
+			   System.out.println("Invalid selection, you must enter a number between 1 and 6 inclusive.");
+			   outFile.println("Invalid selection, you must enter a number between 1 and 6 inclusive.");
+			   }
 			   
 		   }
+		   
 		   
 		   
 		   //random pick 3
 		   //Random(nextInt)
 	   }
+	   while(repeatGame.equals("Y") || repeatGame.equals("y"));
+	    	
+		   System.out.println("The end! Thank you for playing!");
+	   
+	   
+		   
+	   
 	   
 	   
 
@@ -143,8 +160,7 @@ public class HW4_SlotMachineSimulation{
 	   
 	   
 	   
-	   
-	   
+	
 	  
 	
 	   //outputFile.close();
